@@ -6,46 +6,51 @@
     <title>Proyecto de Glosario Interactivo</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #007bff, #00c6ff);
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
-            text-align: center;
             color: white;
             transition: 0.5s ease-in-out;
-            margin: 0;
             padding: 20px;
-            box-sizing: border-box;
         }
 
         #cover {
             background-color: rgba(255, 255, 255, 0.9);
-            padding: 30px;
+            padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             color: #333;
-            transition: 0.5s ease-in-out;
-            max-width: 800px;
             width: 100%;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
         }
 
         #cover h1 {
-            font-size: 28px;
+            font-size: clamp(24px, 5vw, 28px);
             font-weight: 600;
+            margin-bottom: 15px;
         }
 
         #cover p {
-            font-size: 18px;
+            font-size: clamp(16px, 3vw, 18px);
             font-weight: 400;
+            margin-bottom: 10px;
         }
 
         #start {
             padding: 12px 24px;
-            font-size: 18px;
+            font-size: clamp(16px, 3vw, 18px);
             border: none;
             border-radius: 8px;
             background: linear-gradient(135deg, #007bff, #00c6ff);
@@ -53,6 +58,8 @@
             cursor: pointer;
             margin-top: 15px;
             transition: 0.3s;
+            width: 100%;
+            max-width: 200px;
         }
 
         #start:hover {
@@ -64,15 +71,14 @@
             display: none;
             width: 100%;
             max-width: 800px;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
             background: white;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             color: #333;
-            padding: 20px;
-            box-sizing: border-box;
-            margin-top: 20px;
+            margin: 20px auto;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
         }
 
         @keyframes fadeIn {
@@ -80,76 +86,91 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        #search-header {
+        .sticky-header {
             position: sticky;
             top: 0;
             background: white;
-            padding: 20px 0;
             z-index: 10;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        #glosario-container h1 {
+            font-size: clamp(22px, 5vw, 26px);
+            color: #007bff;
+            margin: 0;
         }
 
         #buscar {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
-            border: 1px solid #ccc;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
             font-size: 16px;
             color: #333;
-            box-sizing: border-box;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         #glosario-content {
-            padding: 10px 0;
+            padding: 0 20px 20px;
         }
 
         ul {
             list-style: none;
-            padding: 0;
-            margin: 0;
         }
 
         li {
             background-color: white;
-            padding: 12px;
-            margin: 8px 0;
+            padding: 15px;
+            margin: 10px 0;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transition: 0.3s;
+            border-left: 4px solid #007bff;
         }
 
         li:hover {
-            background-color: #f0f8ff;
-            transform: scale(1.02);
+            background-color: #f8faff;
+            transform: translateX(5px);
         }
 
         b {
             color: #007bff;
+            font-weight: 600;
         }
 
-        #glosario-container h1 {
-            margin: 0 0 15px 0;
-            color: #007bff;
-            position: sticky;
-            top: 0;
-            background: white;
-            padding: 10px 0;
-            z-index: 10;
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+            
+            #cover {
+                padding: 20px;
+            }
+            
+            #glosario-content {
+                padding: 0 15px 15px;
+            }
+            
+            li {
+                padding: 12px;
+                font-size: 15px;
+            }
         }
     </style>
 </head>
 <body>
     <div id="cover">
-        <h1>Glosario Interactivo</h1>
-        <p>Universidad <strong>CENFOTEC</strong></p>
-        <p>Estudiantes: Carlos Carballo, Kenner Gamboa</p>
-        <p>Docente: Juan Gonzalez Quesada</p>
+        <h1>Proyecto de Glosario Interactivo</h1>
+        <p>Escuela: [Nombre de la Escuela]</p>
+        <p>Estudiantes: [Tu Nombre y Compañeros]</p>
         <button id="start" onclick="startProject()">Iniciar</button>
     </div>
 
     <div id="glosario-container">
-        <h1>Glosario Interactivo</h1>
-        <div id="search-header">
+        <div class="sticky-header">
+            <h1>Glosario Interactivo</h1>
             <input type="text" id="buscar" placeholder="Buscar término..." onkeyup="filtrar()">
         </div>
         <div id="glosario-content">
