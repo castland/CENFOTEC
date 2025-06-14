@@ -13,10 +13,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             text-align: center;
             color: white;
             transition: 0.5s ease-in-out;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         #cover {
@@ -26,6 +29,8 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             color: #333;
             transition: 0.5s ease-in-out;
+            max-width: 800px;
+            width: 100%;
         }
 
         #cover h1 {
@@ -57,9 +62,17 @@
 
         #glosario-container {
             display: none;
-            width: 80%;
+            width: 100%;
+            max-width: 800px;
             opacity: 0;
             animation: fadeIn 1s forwards;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            color: #333;
+            padding: 20px;
+            box-sizing: border-box;
+            margin-top: 20px;
         }
 
         @keyframes fadeIn {
@@ -67,19 +80,33 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        #search-header {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 20px 0;
+            z-index: 10;
+        }
+
         #buscar {
-            width: 300px;
+            width: 100%;
             padding: 10px;
             border-radius: 8px;
             border: 1px solid #ccc;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
             font-size: 16px;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        #glosario-content {
+            padding: 10px 0;
         }
 
         ul {
             list-style: none;
             padding: 0;
-            margin-top: 20px;
+            margin: 0;
         }
 
         li {
@@ -87,39 +114,77 @@
             padding: 12px;
             margin: 8px 0;
             border-radius: 8px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transition: 0.3s;
         }
 
         li:hover {
             background-color: #f0f8ff;
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
         b {
             color: #007bff;
         }
+
+        #glosario-container h1 {
+            margin: 0 0 15px 0;
+            color: #007bff;
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 10px 0;
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
     <div id="cover">
-        <h1>Proyecto de Glosario Interactivo</h1>
-        <p>Escuela: [Nombre de la Escuela]</p>
-        <p>Estudiantes: [Tu Nombre y Compañeros]</p>
+        <h1>Glosario Interactivo</h1>
+        <p>Universidad <strong>CENFOTEC</strong></p>
+        <p>Estudiantes: Carlos Carballo, Kenner Gamboa</p>
+        <p>Docente: Juan Gonzalez Quesada</p>
         <button id="start" onclick="startProject()">Iniciar</button>
     </div>
 
     <div id="glosario-container">
         <h1>Glosario Interactivo</h1>
-        <input type="text" id="buscar" placeholder="Buscar término..." onkeyup="filtrar()">
-        <ul id="glosario"></ul>
+        <div id="search-header">
+            <input type="text" id="buscar" placeholder="Buscar término..." onkeyup="filtrar()">
+        </div>
+        <div id="glosario-content">
+            <ul id="glosario"></ul>
+        </div>
     </div>
 
     <script>
         let terminos = [
-            { palabra: "Python", definicion: "Lenguaje de programación interpretado y de alto nivel." },
-            { palabra: "JavaScript", definicion: "Lenguaje de programación usado para desarrollo web." },
-            { palabra: "HTML", definicion: "Lenguaje de marcado para estructurar contenido en la web." }
+            { palabra: "Programa", definicion: "Conjunto de instrucciones escritas en un lenguaje especial que son seguidas por la computadora." },
+            { palabra: "Datos de entrada", definicion: "Los digita el usuario, los sensores recopilan información del entorno o se obtienen de archivos y bases de datos. Estos datos son fundamentales para el funcionamiento de cualquier programa." },
+            { palabra: "Datos de salida", definicion: "Visuales, auditivos, por correo y en formato impreso. Datos de entrada que ya han sido procesados por el programa." },
+            { palabra: "Sistema Operativo", definicion: "Es un programa supervisor que gestiona y controla todas las operaciones de la computadora." },
+            { palabra: "Lenguaje de programación", definicion: "Un sistema de notación especial utilizado para desarrollar programas." },
+            { palabra: "Lenguaje de máquina", definicion: "Las computadoras no comprenden los lenguajes de alto nivel, sino únicamente los de bajo nivel. Este lenguaje está compuesto de instrucciones en código binario, que son secuencias de ceros y unos." },
+            { palabra: "Compilador", definicion: "Programa que traduce un programa escrito en un lenguaje de alto nivel a uno de bajo nivel, para que la computadora lo pueda entender y ejecutar." },
+            { palabra: "Intérprete", definicion: "Lenguaje como Python, utilizado para procesar el código fuente y convertirlo en lenguaje máquina sin pasar por el proceso de compilación. Traduce y ejecuta una a una las instrucciones de un programa, en lugar de traducir todo el programa de una sola vez." },
+            { palabra: "Python", definicion: "Lenguaje de programación que permite automatizar información." },
+            { palabra: "Algoritmo", definicion: "Secuencia de instrucciones de forma ordenada o lógica que dan como resultado una tarea realizada." },
+            { palabra: "Seudocódigo", definicion: "Descripción del algoritmo en un lenguaje natural, entendible por los humanos. Las acciones que se describen serán ejecutadas por la computadora cuando el programa sea convertido a un lenguaje de programación." },
+            { palabra: "Diagrama de flujo", definicion: "Conjunto de símbolos conectados por líneas que representan el algoritmo. Las líneas de flujo determinan el orden secuencial del algoritmo." },
+            { palabra: "Estructura secuencial", definicion: "Se ejecutan todas las instrucciones en secuencia." },
+            { palabra: "Estructura condicional", definicion: "Se ejecuta dependiendo de una pregunta, si es falso o verdadero." },
+            { palabra: "Estructura iterativa", definicion: "Son ciclos o bucles que dependen de las condiciones (una o varias)." },
+            { palabra: "Apilamiento", definicion: "Una estructura después de la otra. Facilita la organización del flujo del programa de manera secuencial, permitiendo que las operaciones se ejecuten una tras otra sin interrupciones." },
+            { palabra: "Anidamiento", definicion: "Una estructura dentro de la otra. Permite organizar el flujo del programa de manera jerárquica, facilitando la gestión y ejecución de múltiples condiciones o bucles." },
+            { palabra: "Insumos", definicion: "También conocidos como datos de entrada. Información que un programa recibe para procesarla y generar un resultado (datos de salida)." },
+            { palabra: "Control de calidad", definicion: "Actividades dirigidas a asegurar que la solución (sistema, programa, etc.) tenga las características deseables: cumple con requisitos, es libre de defectos, funciona correctamente, es eficiente, etc." },
+            { palabra: "Casos de prueba", definicion: "Para probar el programa con diferentes datos de entrada." },
+            { palabra: "Revisiones", definicion: "Lista de chequeo de revisiones aplicada a cada solución." },
+            { palabra: "Comentario en programa", definicion: "Línea de código que el programa no toma en cuenta." },
+            { palabra: "Concatenar", definicion: "Unir cadenas de texto para formar una sola cadena continua. En programación, la concatenación se usa para crear mensajes personalizados, construir rutas de archivo o combinar información de manera eficiente." },
+            { palabra: "Indentado", definicion: "Espacio o tabulación utilizado al comienzo de una línea de código para indicar que pertenece a un bloque de instrucciones. En Python, el indentado es crucial ya que define la estructura del programa y garantiza la ejecución correcta." },
+            { palabra: "Operadores logico-matemáticos", definicion: "Los operadores logicomatemáticos permiten realizar cálculos y evaluar condiciones dentro de los programas." },
+            { palabra: "Funciones en Python", definicion: "Son bloques de código reutilizables que permiten organizar y estructurar un programa de manera eficiente. Se definen usando la palabra clave `def` seguida del nombre de la función y paréntesis que pueden contener parámetros." },
         ];
 
         terminos.sort((a, b) => a.palabra.localeCompare(b.palabra));
