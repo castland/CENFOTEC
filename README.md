@@ -1,2 +1,2 @@
 # CENFOTEC
-Proyectos CENFOTEC
+Repositorio de Proyectos CENFOTEC
