@@ -7,6 +7,10 @@ import os
 import random
 import time
 
+#LIMPIAR CONSOLA
+def limpiar_consola():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 #MOSTRAR MENU DEL JUEGO
 def mostrar_menu():
     print("╔════════════════════════════╗")
@@ -59,33 +63,33 @@ while True:
     opcion = input("Seleccione una opción: ")
 
     if opcion == '1':
-        os.system('cls' if os.name == 'nt' else 'clear')
+        limpiar_consola()
         print("╔═══════════════════════╗")
         print("║ Iniciando el juego... ║")
         print("╚═══════════════════════╝")
         time.sleep(2)
-        os.system('cls' if os.name == 'nt' else 'clear')
+        limpiar_consola()
     
         #AQUI VA EL RESTO DEL JUEGO DE LA OCA
         break
     elif opcion == '2':
-        os.system('cls' if os.name == 'nt' else 'clear') 
+        limpiar_consola() 
         mostrar_instrucciones()
         input("Presiona ENTER para volver al menú...")
-        os.system('cls' if os.name == 'nt' else 'clear')
+        limpiar_consola()
     elif opcion == '3':
-        os.system('cls' if os.name == 'nt' else 'clear')
+        limpiar_consola()
         print("╔═══════════════════════════════════╗")
         print("║ Saliendo del juego. ¡Hasta luego! ║")
         print("╚═══════════════════════════════════╝")
         time.sleep(2)
-        os.system('cls' if os.name == 'nt' else 'clear')
+        limpiar_consola()
         break
     else:
-        os.system('cls' if os.name == 'nt' else 'clear')
+        limpiar_consola()
         print("╔═══════════════════════════════════╗")
         print("║          Opción inválida          ║")
         print("║ selecciona una opción del 1 al 3. ║")
         print("╚═══════════════════════════════════╝")
         time.sleep(2)
-        os.system('cls' if os.name == 'nt' else 'clear')
+        limpiar_consola()
