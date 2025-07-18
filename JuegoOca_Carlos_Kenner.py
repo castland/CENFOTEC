@@ -50,7 +50,7 @@ calavera = [58]
 jardin_de_la_oca = [63]
 
 # falta implementar:
-# Sistema de jugad
+# Sistema de jugadores
 # Lógica de dados
 # Movimiento de fichas
 # Efectos de casillas especiales
@@ -93,3 +93,97 @@ while True:
         print("╚═══════════════════════════════════╝")
         time.sleep(2)
         limpiar_consola()
+
+
+# Simulación completa de turnos con efectos de casillas especiales
+jugador_1_posicion = 0
+jugador_2_posicion = 0
+turno = 1  # 1 = Jugador 1, 2 = Jugador 2
+turnos_perdidos_j1 = 0
+turnos_perdidos_j2 = 0
+
+while jugador_1_posicion < 63 and jugador_2_posicion < 63:
+    repetir_turno = False
+
+    if turno == 1:
+        if turnos_perdidos_j1 > 0:
+            print(f"Jugador 1 pierde este turno. Turnos restantes: {turnos_perdidos_j1}")
+            turnos_perdidos_j1 -= 1
+            turno = 2
+            continue
+        jugador_actual = 1
+        posicion = jugador_1_posicion
+    else:
+        if turnos_perdidos_j2 > 0:
+            print(f"Jugador 2 pierde este turno. Turnos restantes: {turnos_perdidos_j2}")
+            turnos_perdidos_j2 -= 1
+            turno = 1
+            continue
+        jugador_actual = 2
+        posicion = jugador_2_posicion
+
+    dado_1 = random.randint(1, 6)
+    dado_2 = random.randint(1, 6)
+    avanzar = dado_1 + dado_2
+    print(f"Turno del Jugador {jugador_actual}: Lanzó {dado_1} + {dado_2} = {avanzar}")
+
+    posicion += avanzar
+
+    # Si pasa de 63, retrocede lo que se pasó
+    if posicion > 63:
+        exceso = posicion - 63
+        print(f"¡Ups! Te pasaste. Retrocedes {exceso} casilla(s).")
+        posicion = 63 - exceso
+
+    # Verificación de casillas especiales
+    if posicion in ocas:
+        while posicion in ocas:
+            index_oca = ocas.index(posicion)
+            if index_oca + 1 < len(ocas):
+                nueva_posicion = ocas[index_oca + 1]
+                print(f"¡Oca! Avanzas a la siguiente Oca: {nueva_posicion}")
+                posicion = nueva_posicion
+                dado_1 = random.randint(1, 6)
+                dado_2 = random.randint(1, 6)
+                avanzar = dado_1 + dado_2
+                print(f"Vuelves a lanzar: {dado_1} + {dado_2} = {avanzar}")
+                posicion += avanzar
+            else:
+                break
+        repetir_turno = True
+
+    elif posicion in laberinto:
+        print("¡Laberinto! Retrocedes a la casilla 30.")
+        posicion = 30
+
+    elif posicion in pozo:
+        print("¡Pozo! Pierdes 1 turno.")
+        if jugador_actual == 1:
+            turnos_perdidos_j1 = 1
+        else:
+            turnos_perdidos_j2 = 1
+
+    elif posicion in carcel or posicion in calavera:
+        nombre = "Cárcel" if posicion in carcel else "Calavera"
+        print(f"¡{nombre}! Pierdes 2 turnos.")
+        if jugador_actual == 1:
+            turnos_perdidos_j1 = 2
+        else:
+            turnos_perdidos_j2 = 2
+
+    # Actualizar posición
+    if jugador_actual == 1:
+        jugador_1_posicion = posicion
+        print("Jugador 1 avanza a casilla", jugador_1_posicion)
+    else:
+        jugador_2_posicion = posicion
+        print("Jugador 2 avanza a casilla", jugador_2_posicion)
+
+    # Verificar victoria
+    if posicion == 63:
+        print(f"¡Jugador {jugador_actual} ha llegado exactamente a la casilla 63 y gana el juego!")
+        break
+
+    # Solo cambiar de turno si no hay repetición
+    if not repetir_turno:
+        turno = 2 if turno == 1 else 1
