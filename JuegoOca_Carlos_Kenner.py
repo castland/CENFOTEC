@@ -167,14 +167,18 @@ def mostrar_mensaje_especial(mensaje):
     limpiar_consola()
 
 # MOSTRAR TURNO DEL JUGADOR
-def mostrar_turno(jugador):
+def mostrar_turno(jugador, mensaje_especial=None):
     nombre = j1 if jugador == 1 else j2
     print("╔═════════════════════════════════════════════════╗")
     print("║                   TURNO ACTUAL                  ║")
     print("╠═════════════════════════════════════════════════╣")
     
     # Calcular espacios para centrar el mensaje
-    mensaje = "Turno de " + nombre
+    if mensaje_especial:
+        mensaje = mensaje_especial
+    else:
+        mensaje = "Turno de " + nombre
+    
     ancho_caja = 51
     espacios_totales = ancho_caja - len(mensaje) - 4
     espacios_izq = espacios_totales // 2
@@ -237,19 +241,52 @@ def logica_juego():
         
         # Verificación de casillas especiales
         if posicion in ocas:
-            while posicion in ocas:
-                index_oca = ocas.index(posicion)
-                if index_oca + 1 < len(ocas):
-                    nueva_posicion = ocas[index_oca + 1]
+            index_oca = ocas.index(posicion)
+            if index_oca + 1 < len(ocas):
+                nueva_posicion = ocas[index_oca + 1]
+                mostrar_mensaje_especial(f"¡Oca! Avanzas a la siguiente Oca: {nueva_posicion}")
+                posicion = nueva_posicion
+                
+                # Mostrar mensaje especial para el turno de la Oca
+                nombre_jugador = j1 if jugador_actual == 1 else j2
+                mensaje_oca = f"¡De oca a oca y tiro porque me toca! Turno de {nombre_jugador}"
+                mostrar_turno(jugador_actual, mensaje_oca)
+                
+                # Volver a tirar dados
+                tirar_dados()
+                posicion += avanzar
+                
+                # Si pasa de 63 en el segundo tiro, retrocede lo que se pasó
+                if posicion > 63:
+                    exceso = posicion - 63
+                    mostrar_mensaje_especial(f"¡Ups! Te pasaste. Retrocedes {exceso} casilla(s).")
+                    posicion = 63 - exceso
+                
+                # Verificar si cayó en otra casilla especial en el segundo tiro
+                if posicion in ocas:
+                    nueva_posicion = ocas[ocas.index(posicion) + 1] if ocas.index(posicion) + 1 < len(ocas) else posicion
                     mostrar_mensaje_especial(f"¡Oca! Avanzas a la siguiente Oca: {nueva_posicion}")
                     posicion = nueva_posicion
-                    
-                    # Volver a tirar dados
-                    mostrar_turno(jugador_actual)
-                    tirar_dados()
-                    posicion += avanzar
-                else:
-                    break
+                elif posicion in puentes:
+                    otro_puente = puentes[0] if posicion == puentes[1] else puentes[1]
+                    mostrar_mensaje_especial(f"¡Puente! Saltas al otro puente: {otro_puente}")
+                    posicion = otro_puente
+                elif posicion in laberinto:
+                    mostrar_mensaje_especial("¡Laberinto! Retrocedes a la casilla 30.")
+                    posicion = 30
+                elif posicion in pozo:
+                    mostrar_mensaje_especial("¡Pozo! Pierdes 1 turno.")
+                    if jugador_actual == 1:
+                        turnos_perdidos_j1 = 1
+                    else:
+                        turnos_perdidos_j2 = 1
+                elif posicion in carcel or posicion in calavera:
+                    nombre = "Cárcel" if posicion in carcel else "Calavera"
+                    mostrar_mensaje_especial(f"¡{nombre}! Pierdes 2 turnos.")
+                    if jugador_actual == 1:
+                        turnos_perdidos_j1 = 2
+                    else:
+                        turnos_perdidos_j2 = 2
             repetir_turno = True
         
         elif posicion in puentes:
