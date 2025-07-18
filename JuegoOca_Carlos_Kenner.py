@@ -2,7 +2,7 @@
 
 #SIMBOLOS PARA HACER CUADROS ═, ║, ╔, ╗, ╚, ╝, ╠, ╦, ╩, ╬ 
 
-#LISTAS DE CASILLAS ESPECIALES (convertidas a variables individuales)
+#LISTAS DE CASILLAS ESPECIALES
 oca_1 = 5
 oca_2 = 9
 oca_3 = 14
@@ -214,7 +214,7 @@ while True:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 posicion = 63 - exceso
 
-            # Verificación de casillas especiales (sin colecciones)
+            # Verificación de casillas especiales
             if posicion == oca_1 or posicion == oca_2 or posicion == oca_3 or posicion == oca_4 or posicion == oca_5 or posicion == oca_6 or posicion == oca_7 or posicion == oca_8 or posicion == oca_9 or posicion == oca_10 or posicion == oca_11 or posicion == oca_12 or posicion == oca_13:
                 if posicion == oca_1:
                     nueva_posicion = oca_2
