@@ -36,7 +36,7 @@ def mostrar_instrucciones():
     print("║   'Puente': Salta al otro puente.                       ║")
     print("║   'Pozo': Pierdes un turno.                             ║")
     print("║   'Laberinto': Retrocedes a la casilla 30.              ║")
-    print("║   'Cárcel': Piedes dos turnos.                          ║")
+    print("║   'Cárcel': Pierdes dos turnos.                         ║")
     print("║   'Calavera': Pierdes dos turnos.                       ║")
     print("╚═════════════════════════════════════════════════════════╝")
 
@@ -50,7 +50,7 @@ calavera = [58]
 jardin_de_la_oca = [63]
 
 # falta implementar:
-# Sistema de jugadores
+# Sistema de jugad
 # Lógica de dados
 # Movimiento de fichas
 # Efectos de casillas especiales
