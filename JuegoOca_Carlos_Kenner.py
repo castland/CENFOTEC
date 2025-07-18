@@ -249,7 +249,7 @@ def logica_juego():
                 
                 # Mostrar mensaje especial para el turno de la Oca
                 nombre_jugador = j1 if jugador_actual == 1 else j2
-                mensaje_oca = f"¡De oca a oca y tiro porque me toca! Turno de {nombre_jugador}"
+                mensaje_oca = f"Turno de {nombre_jugador}"
                 mostrar_turno(jugador_actual, mensaje_oca)
                 
                 # Volver a tirar dados
