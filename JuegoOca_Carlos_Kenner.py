@@ -170,7 +170,7 @@ def mostrar_mensaje_especial(mensaje):
 def mostrar_turno(jugador):
     nombre = j1 if jugador == 1 else j2
     print("╔═════════════════════════════════════════════════╗")
-    print("║                  TURNO ACTUAL                   ║")
+    print("║                   TURNO ACTUAL                  ║")
     print("╠═════════════════════════════════════════════════╣")
     
     # Calcular espacios para centrar el mensaje
