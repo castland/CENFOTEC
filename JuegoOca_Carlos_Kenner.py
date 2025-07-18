@@ -244,7 +244,7 @@ def logica_juego():
             index_oca = ocas.index(posicion)
             if index_oca + 1 < len(ocas):
                 nueva_posicion = ocas[index_oca + 1]
-                mostrar_mensaje_especial(f"¡Oca! Avanzas a la siguiente Oca: {nueva_posicion}")
+                mostrar_mensaje_especial(f"¡De oca a oca y tiro porque me toca!: {nueva_posicion}")
                 posicion = nueva_posicion
                 
                 # Mostrar mensaje especial para el turno de la Oca
@@ -287,7 +287,7 @@ def logica_juego():
                         turnos_perdidos_j1 = 2
                     else:
                         turnos_perdidos_j2 = 2
-            repetir_turno = True
+            # No necesitamos repetir_turno = True aquí porque ya tiramos los dados nuevamente
         
         elif posicion in puentes:
             # Encontrar el otro puente
