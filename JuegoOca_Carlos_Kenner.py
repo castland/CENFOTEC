@@ -6,6 +6,7 @@
 import os
 import random
 import time
+import unicodedata
 
 #COLORES ANSI
 AZUL = '\033[34m'
@@ -50,8 +51,37 @@ def mostrar_instrucciones():
     input("Presiona ENTER para volver al menú...")
 
 # TABLERO DEL JUEGO
+def celda(texto):
+    visual_width = 0
+    for char in texto:
+        if unicodedata.east_asian_width(char) in ('F', 'W'): # Verifica si el carácter es de ancho completo
+            visual_width += 2
+        else:
+            visual_width += 1
+    
+    padding_needed = 6 - visual_width # Ajusta el ancho de la celda a 6 caracteres visuales
+    return texto + ' ' * max(0, padding_needed) # Añade espacios para completar el ancho de la celda
+
 def mostrar_tablero():
-    print("AUN NO REALIZADO")
+    print("╔══════╦══════╦══════╦══════╦══════╦══════╦══════╦══════╗")
+    print(f"║{celda('22')}║{celda('21')}║{celda('20')}║{celda('19')}║{celda('18 🪿  ')}║{celda('17')}║{celda('16')}║{celda('15')}║")
+    print("╠══════╬══════╬══════╬══════╬══════╬══════╬══════╬══════╣")
+    print(f"║{celda('23 🪿  ')}║{celda('44')}║{celda('43')}║{celda('42 🌀')}║{celda('41 🪿  ')}║{celda('40')}║{celda('39')}║{celda('14 🪿  ')}║")
+    print("╠══════╬══════╬══════╬══════╬══════╬══════╬══════╬══════╣")
+    print(f"║{celda('24')}║{celda('45 🪿  ')}║{celda('58 💀')}║{celda('57')}║{celda('56 🚔')}║{celda('55')}║{celda('38')}║{celda('13')}║")
+    print("╠══════╬══════╬══════╬══════╬══════╬══════╬══════╬══════╣")
+    print(f"║{celda('25')}║{celda('46')}║{celda('59 🪿  ')}║{celda(' FIN ')}║{celda('63 🌼')}║{celda('54 🪿  ')}║{celda('37')}║{celda('12 🌉')}║")
+    print("╠══════╬══════╬══════╬══════╬══════╬══════╬══════╬══════╣")
+    print(f"║{celda('26')}║{celda('47')}║{celda('60')}║{celda('61')}║{celda('62')}║{celda('53')}║{celda('36 🪿  ')}║{celda('11')}║")
+    print("╠══════╬══════╬══════╬══════╬══════╬══════╬══════╬══════╣")
+    print(f"║{celda('27 🪿  ')}║{celda('48')}║{celda('49')}║{celda('50 🪿  ')}║{celda('51')}║{celda('52')}║{celda('35')}║{celda('10')}║")
+    print("╠══════╬══════╬══════╬══════╬══════╬══════╬══════╬══════╣")
+    print(f"║{celda('28')}║{celda('29')}║{celda('30')}║{celda('31 🕳️  ')}║{celda('32 🪿  ')}║{celda('33')}║{celda('34')}║{celda('09 🪿  ')}║")
+    print("╠══════╬══════╬══════╬══════╬══════╬══════╬══════╬══════╣")
+    print(f"║{celda('01')}║{celda('02')}║{celda('03')}║{celda('04')}║{celda('05 🪿  ')}║{celda('06 🌉 ')}║{celda('07')}║{celda('08')}║")
+    print("╚══════╩══════╩══════╩══════╩══════╩══════╩══════╩══════╝")
+    print("🪿= Oca 🌉= Puente 🕳️= Pozo 🌀= Laberinto 💀= Muerte 🚔= Cárcel")
+    print(" ")
 
 #LISTAS DE CASILLAS ESPECIALES
 ocas = [5, 9, 14, 18, 23, 27, 32, 36, 41, 45, 50, 54, 59]
@@ -150,6 +180,7 @@ def tirar_dados():
 # MOSTRAR ESTADO DEL JUEGO
 def mostrar_estado():
     global j1, j2, jugador_1_posicion, jugador_2_posicion
+    mostrar_tablero()
     print("╔═════════════════════════════════════════════════╗")
     print("║                ESTADO DEL JUEGO                 ║")
     print("╠═════════════════════════════════════════════════╣")
