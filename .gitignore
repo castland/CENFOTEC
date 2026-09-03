@@ -1,0 +1,26 @@
+# ==========================================================================
+# .gitignore — CENFOTEC
+# ==========================================================================
+
+# ── NetBeans / Java (proyecto ElRinconDelCafe) ──────────────────────────────
+# Configuración local del IDE (rutas de la máquina, no portable)
+nbproject/private/
+**/nbproject/private/
+
+# Salida de compilación (se regenera con build)
+build/
+**/build/
+dist/
+**/dist/
+*.class
+
+# ── Archivos comprimidos (no versionar zips del proyecto) ────────────────────
+*.zip
+*.rar
+*.7z
+
+# ── Sistema operativo / editor ───────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
