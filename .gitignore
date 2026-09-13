@@ -24,3 +24,6 @@ dist/
 Thumbs.db
 *.swp
 .vscode/
+
+# ── Kiro (herramienta de espacio de trabajo, no del proyecto) ────────────────
+.kiro/
